@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  database:
+    image: postgres:10.5
+    restart: always
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      interval: 10s
+      timeout: 45s
+      retries: 10
+    volumes:
+      - ./InitialScript/01_Init.sql:/docker-entrypoint-initdb.d/01_Init.sql
+  localstack:
+    image: localstack/localstack
+    ports:
+      - '4567-4584:4567-4584'
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4567
+      - SERVICES=s3
