@@ -1,5 +1,14 @@
 version: '3.3'
 services:
+  jenkins:
+      container_name: jenkins
+      # restart: always # option in the compose file ensures that the Jenkins container remains up even after a reboot.
+      image: jenkins/jenkins:lts
+      ports:
+        - 8080:8080
+      volumes:
+        - jenkins-home:/var/jenkins_home
+
   database:
     image: postgres:10.5
     restart: always
@@ -17,6 +26,7 @@ services:
       retries: 10
     volumes:
       - ./InitialScript/01_Init.sql:/docker-entrypoint-initdb.d/01_Init.sql
+  
   localstack:
     image: localstack/localstack
     ports:
@@ -25,3 +35,6 @@ services:
       - AWS_DEFAULT_REGION=us-east-1
       - EDGE_PORT=4567
       - SERVICES=s3
+
+volumes:
+  jenkins-home: # Volumes help ensure that data is not lost when a container is stopped, restarted, or removed.
