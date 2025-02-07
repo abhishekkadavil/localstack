@@ -25,8 +25,8 @@ services:
       timeout: 45s
       retries: 10
     volumes:
-      - ./InitialScript/01_Init.sql:/docker-entrypoint-initdb.d/01_create_table.sql
-      - ./InitialScript/01_Init.sql:/docker-entrypoint-initdb.d/02_insert_data.sql
+      - ./InitialScript/01_create_table.sql:/docker-entrypoint-initdb.d/01_create_table.sql
+      - ./InitialScript/02_insert_data.sql:/docker-entrypoint-initdb.d/02_insert_data.sql
   
   localstack:
     image: localstack/localstack
