@@ -1,6 +1,6 @@
 INSERT INTO users values(01,'abhishek kadavil');
 
-INSERT INTO employee (employee_id, employee_name, employee_age, employee_salary, employee_designation) VALUES
+INSERT INTO employees (employee_id, employee_name, employee_age, employee_salary, employee_designation) VALUES
 (1, 'John Doe', 28, 50000.00, 'Software Engineer'),
 (2, 'Jane Smith', 34, 60000.00, 'Project Manager'),
 (3, 'Alice Johnson', 30, 55000.00, 'Business Analyst'),

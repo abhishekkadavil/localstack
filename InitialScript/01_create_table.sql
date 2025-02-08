@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY (user_id)
 );
 
-CREATE TABLE IF NOT EXISTS employee (
+CREATE TABLE IF NOT EXISTS employees (
   employee_id INT NOT NULL,
   employee_name varchar(250) NOT NULL,
   employee_age INT NOT NULL,
