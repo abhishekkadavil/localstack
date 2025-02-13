@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   jenkins:
-      container_name: jenkins
+      container_name: jenkins-container
       restart: always # option in the compose file ensures that the Jenkins container remains up even after a reboot.
       image: jenkins/jenkins:lts
       ports:
@@ -10,6 +10,7 @@ services:
         - jenkins-home:/var/jenkins_home
 
   database:
+    container_name: postgres-container
     image: postgres:10.5
     restart: always
     environment:
@@ -27,7 +28,18 @@ services:
     volumes:
       - ./InitialScript/01_create_table.sql:/docker-entrypoint-initdb.d/01_create_table.sql
       - ./InitialScript/02_insert_data.sql:/docker-entrypoint-initdb.d/02_insert_data.sql
-  
+  dbeaver:
+    container_name: dbeaver-container
+    image: dbeaver/cloudbeaver
+    ports: ["8000:8978"]
+    hostname: gui
+    volumes:
+      - ./dbeaver:/opt/cloudbeaver/workspace
+    tty: true
+    depends_on:
+      - database
+    links:
+      - database
   localstack:
     image: localstack/localstack
     ports:
