@@ -48,3 +48,5 @@ bin/
 .idea/
 *.iml
 .run/Template JUnit.run.xml
+
+/dbeaver
